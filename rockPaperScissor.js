@@ -6,7 +6,6 @@ const choices = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random() * 3);
-    console.log(compChoice);
     compChoice = choices[compChoice];
     console.log(compChoice);
     return compChoice;
@@ -16,28 +15,41 @@ function playRound( playerChoice,computerChoice){
     playerChoice = playerChoice.toLowerCase();
     if(playerChoice ==="rock" && computerChoice !=="rock"){
         if(computerChoice==="paper"){
-            return "You Lose!, Paper beats Rock"
+            return 0
         }else{
-            return "You Win!, Rock beats Scissors"
+            return 1
         }
     }else if(playerChoice ==="paper" && computerChoice !=="paper"){
         if(computerChoice==="scissors"){
-            return "You Lose!, Scissors beats Paper"
+            return 0
         }else{
-            return "You Win!, Paper beats Rock"
+            return 1
         }
     }else if(playerChoice ==="scissors" && computerChoice !=="scissors"){
         if(computerChoice==="rock"){
-            return "You Lose!, Rock beats Scissors"
+            return 0
         }else{
-            return "You Win!, Scissors beats Paper"
+            return 1
         }
     }else{
-        return "DRAW!"
+        return 0
     }
 
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game(){
+    let win_counts = 0;
+    for(let i = 0; i < 5; i++){
+        let playerSelection = prompt("Choince between: rock, paper, scissors")
+        let result = playRound(playerSelection.toLocaleLowerCase(), getComputerChoice());
+        console.log(result);
+        win_counts += result;
+    }
+    if(win_counts>2){
+        console.log("You Win!")
+    }else{
+        console.log("You Lose!")
+    }
+}
+
+game();
